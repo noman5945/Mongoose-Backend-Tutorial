@@ -47,4 +47,4 @@ const studentSchema=new Schema<Student>({
 /**
  * Student Model for DB query depending on Schema
  */
-const Student=model<Student>('Student',studentSchema) 
+export const StudentModel=model<Student>('Student',studentSchema) 

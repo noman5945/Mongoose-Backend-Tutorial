@@ -15,7 +15,7 @@ We followed the given pattern:
 
 Request-Response Flow of Moduler pattern:
 <img src="https://i.ibb.co/NWfQbPW/Modular-Pattern-Data-flow.png" alt="Modular-Pattern-Data-flow" border="0">
-[Client]--->[Route.ts]--->[Controller.ts]<-----(request,response)----->[Service.ts]
+[Client]--->[Route.ts]--->[Controller.ts]<-----(request,response)----->[Service.ts]<----(request,response)---->[Database]
 
 after getting a response from Service,Controller sends data to Client
 
