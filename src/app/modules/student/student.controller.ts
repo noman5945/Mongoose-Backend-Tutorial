@@ -21,6 +21,41 @@ const createStudent=async (req:Request,res:Response)=>{
     
 }
 
+const getAllStudents=async(req:Request,res:Response)=>{
+    try {
+        
+        const result = await StudentServices.getAllStudentsFromDB()
+        res.status(200).json({
+            success:true,
+            message:"Students data retrived successfully",
+            data:result
+        }) 
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+/**
+ * Method to get single data doc of student by ID
+ * @param req Student ID given in the router link as parameter (studentID)
+ * @param res An object data if data by that ID exists or null if no data by that ID
+ */
+const getStudentByID=async(req:Request,res:Response)=>{
+    try {
+        const queryID=req.params.studentID
+        const result=await StudentServices.getStudentByIDfromDB(queryID)
+        res.status(200).json({
+            success:true,
+            message:"Student data retrived successfully",
+            data:result
+        })
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 export const StudentControllers={
-    createStudent
+    createStudent,
+    getAllStudents,
+    getStudentByID
 }
