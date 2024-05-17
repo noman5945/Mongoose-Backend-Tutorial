@@ -9,6 +9,9 @@ import { StudentServices } from "./student.service";
 const createStudent=async (req:Request,res:Response)=>{
     try {
         const student=req.body
+        /**
+         * TO DO: Implement JOI validator for request body
+         */
         const result = await StudentServices.createStudentIntoDB(student);
         res.status(200).json({
             success:true,
@@ -16,7 +19,11 @@ const createStudent=async (req:Request,res:Response)=>{
             data:result
         })    
     } catch (error) {
-        console.log(error)
+        res.status(200).json({
+            success:false,
+            message:"Error occured while create Student data",
+            error:error
+        })
     }
     
 }

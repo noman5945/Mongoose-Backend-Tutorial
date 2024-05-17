@@ -1,3 +1,5 @@
+<h2>Core Concepts:</h2>
+<br>
 Moduler Pattern
 
 - In this project we implemented the "Moduler Pattern" software design.Each entity (student,teacher) has their own modules. Each
@@ -20,3 +22,11 @@ Request-Response Flow of Moduler pattern:
 after getting a response from Service,Controller sends data to Client
 
 [Controller.ts]---(response)--->[Client]
+
+<h2>External Packeges:</h2>
+Validation:
+<ul>
+  <li>NPM Validator: JS --> npm i validator | TS--->npm i @types/validator </li>
+  <li>JOI Validator: JS --> npm i joi (implemented at 'controller' file) </li>
+  
+</ul>
