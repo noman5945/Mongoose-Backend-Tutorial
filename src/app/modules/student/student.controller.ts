@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { StudentServices } from "./student.service";
+import studentValidatorSchema from "./student.validator";
 
 /**
  * Creates student entity with data.This function will call service function to get data.Check student.service.ts .
@@ -8,18 +9,31 @@ import { StudentServices } from "./student.service";
  */
 const createStudent=async (req:Request,res:Response)=>{
     try {
-        const student=req.body
         /**
          * TO DO: Implement JOI validator for request body
+         * Check student.validators.ts
          */
-        const result = await StudentServices.createStudentIntoDB(student);
-        res.status(200).json({
-            success:true,
-            message:"Student created successfully",
-            data:result
-        })    
+        
+        const student=req.body
+        const {error,value}=studentValidatorSchema.validate(student,{allowUnknown:true})
+        
+        if(error){
+            res.status(500).json({
+                success:false,
+                message:"Error occured while create Student data(Joi)",
+                error:error.details
+            })
+        }else{
+            const result = await StudentServices.createStudentIntoDB(value);
+        
+            res.status(200).json({
+                success:true,
+                message:"Student created successfully",
+                data:result
+            })
+        }
     } catch (error) {
-        res.status(200).json({
+        res.status(500).json({
             success:false,
             message:"Error occured while create Student data",
             error:error
