@@ -1,13 +1,20 @@
-import { Student } from "./student.interface";
-import { StudentModel } from "./student.model";
+import { TStudent } from "./student.interface";
+import { Student } from "./student.model";
 
 /**
  * This function creates a student data in database.
- * @param student A Student type data
+ * @param studentData A Student type data
  * @returns {Object} A result response data after inserting into database containig success and other infos
  */
-const createStudentIntoDB=async (student:Student)=>{
-    const result=await StudentModel.create(student)
+const createStudentIntoDB=async (studentData:TStudent)=>{
+    //const result=await Student.create(student) //builtin static method
+    
+    //Custom instance method
+    const student=new Student(studentData)
+    if(await student.isUserExists(studentData.id)){
+        throw new Error("User already Exists")
+    }
+    const result=await student.save()
     return result
 }
 
@@ -16,7 +23,7 @@ const createStudentIntoDB=async (student:Student)=>{
  * @returns Entire array of data 
  */
 const getAllStudentsFromDB=async()=>{
-    const result=await StudentModel.find()
+    const result=await Student.find()
     return result
 }
 
@@ -26,7 +33,7 @@ const getAllStudentsFromDB=async()=>{
  * @returns Single data of the student of that ID
  */
 const getStudentByIDfromDB=async(id:string)=>{
-    const result=StudentModel.findOne({id:id})
+    const result=Student.findOne({id:id})
     return result;
 }
 

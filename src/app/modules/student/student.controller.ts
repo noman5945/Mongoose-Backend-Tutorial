@@ -32,10 +32,10 @@ const createStudent=async (req:Request,res:Response)=>{
                 data:result
             })
         }
-    } catch (error) {
+    } catch (error:any) {
         res.status(500).json({
             success:false,
-            message:"Error occured while create Student data",
+            message:error.message||"Error occured while create Student data",
             error:error
         })
     }

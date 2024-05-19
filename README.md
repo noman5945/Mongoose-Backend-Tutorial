@@ -23,6 +23,22 @@ after getting a response from Service,Controller sends data to Client
 
 [Controller.ts]---(response)--->[Client]
 
+Mongoose Built-in Methods
+-studentsModel.create() //built-in static method
+-const student = new StudentsModel() ; student.save() //built-in intance method
+
+Mongoos Middleware:
+
+- They are also called 'Mongoose Hooks'
+  - 3 types:
+  - Document Middleware
+  - Query Middleware
+  - Aggregation Middleware
+  - Implement at 'schema.ts'
+
+Note: We save passwords as "Hash/Hexadecimal/Encrypted" password in DB. Not in plain text. Here we utilzed 'bycrypt' for that.
+--> npm i -D @types/bcrypt
+
 <h2>External Packeges:</h2>
 Validation:
 <ul>

@@ -44,6 +44,7 @@ const localGuardianValidatorSchema: ObjectSchema = Joi.object({
 const studentValidatorSchema: ObjectSchema = Joi.object({
     id: Joi.string().required(),
     name: userNameValidatorSchema.required(),
+    password:Joi.string().max(20).required(),
     gender: Joi.string()
         .valid('male', 'female')
         .required()
