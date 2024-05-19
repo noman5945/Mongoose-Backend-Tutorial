@@ -70,7 +70,8 @@ const studentValidatorSchema: ObjectSchema = Joi.object({
     profileImg: Joi.string().optional(),
     isActive: Joi.string()
         .valid('active', 'inactive')
-        .default('active')
+        .default('active'),
+    isDeleted:Joi.boolean().default(false)
 });
 
 export default studentValidatorSchema

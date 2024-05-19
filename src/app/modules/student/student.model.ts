@@ -85,11 +85,15 @@ const studentSchema=new Schema<TStudent,StudentModel,StudentMethods>({
         type:String,
         enum:["active","inactive"],
         default:"active"
+    },
+    isDeleted:{
+        type:Boolean,
+        default:false
     }
 })
 
 /**
- * QUery Middleware to convert password into hash before saving into DB
+ * Document Middleware to convert password into hash before saving into DB
  * @param password 
  * @returns 
  */
@@ -99,6 +103,19 @@ studentSchema.pre('save',async function(next){
     next()
 })
 
+/**
+ * Middleware to remove password for security purpose AFTER data hasbeen fetched
+ */
+studentSchema.post('save',function(doc,next){
+    doc.password='';
+    next()
+})
+
+/**
+ * Method to find is the user already exists or not
+ * @param id Newly created student id
+ * @returns null if not exists. If exists then the data of that ID 
+ */
 studentSchema.methods.isUserExists=async function(id:string){
     const existingUser=await Student.findOne({id})
     return existingUser

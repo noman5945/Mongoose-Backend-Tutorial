@@ -38,6 +38,7 @@ export type TStudent= {
     localGurdian:TLocalGurdian;
     profileImg?:string;
     isActive:'active'|"inactive"
+    isDeleted:boolean
 }
 
 //custom instance methods

@@ -51,8 +51,12 @@ const getAllStudents=async(req:Request,res:Response)=>{
             message:"Students data retrived successfully",
             data:result
         }) 
-    } catch (error) {
-        console.log(error)
+    } catch (error:any) {
+        res.status(500).json({
+            success:false,
+            message:error.message||"Error occured while retrieve Student data",
+            error:error
+        })
     }
 }
 
@@ -70,13 +74,41 @@ const getStudentByID=async(req:Request,res:Response)=>{
             message:"Student data retrived successfully",
             data:result
         })
-    } catch (error) {
-        console.log(error)
+    } catch (error:any) {
+        res.status(500).json({
+            success:false,
+            message:error.message||"Error occured while get a Student data",
+            error:error
+        })
+    }
+}
+
+/**
+ * Method to delete single data doc of student by ID
+ * @param req Student ID given in the router link as parameter (studentID)
+ * @param res An object data if data by that ID exists or null if no data by that ID
+ */
+const deleteStudentByID=async(req:Request,res:Response)=>{
+    try {
+        const queryID=req.params.studentID
+        const result=await StudentServices.deleteStudentByID(queryID)
+        res.status(200).json({
+            success:true,
+            message:"Student data deleted successfully",
+            data:result
+        })
+    } catch (error:any) {
+        res.status(500).json({
+            success:false,
+            message:error.message||"Error occured while deleting a Student data",
+            error:error
+        })
     }
 }
 
 export const StudentControllers={
     createStudent,
     getAllStudents,
-    getStudentByID
+    getStudentByID,
+    deleteStudentByID
 }

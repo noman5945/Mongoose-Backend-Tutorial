@@ -33,12 +33,24 @@ const getAllStudentsFromDB=async()=>{
  * @returns Single data of the student of that ID
  */
 const getStudentByIDfromDB=async(id:string)=>{
-    const result=Student.findOne({id:id})
+    const result=await Student.findOne({id:id})
     return result;
+}
+
+
+/**
+ * Method to delete a student from database
+ * @param id ID of the student to be deleted
+ * @returns response after changing status
+ */
+const deleteStudentByID=async(id:string)=>{
+    const result =await Student.updateOne({id},{isDeleted:true})
+    return result
 }
 
 export const StudentServices={
     createStudentIntoDB,
     getAllStudentsFromDB,
-    getStudentByIDfromDB
+    getStudentByIDfromDB,
+    deleteStudentByID
 }
